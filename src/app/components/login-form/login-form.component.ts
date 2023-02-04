@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { Trainer } from 'src/app/models/trainer.model';
@@ -9,14 +10,18 @@ import { Trainer } from 'src/app/models/trainer.model';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent {
-  constructor(private readonly LoginService: LoginService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly LoginService: LoginService
+  ) {}
 
   public loginSubmit(loginForm: NgForm): void {
     const { username } = loginForm.value;
-    console.log(username);
 
     this.LoginService.login(username).subscribe({
-      next: (trainer: Trainer) => {},
+      next: (trainer: Trainer) => {
+        this.router.navigateByUrl('/catalogue');
+      },
       error: () => {},
     });
   }
