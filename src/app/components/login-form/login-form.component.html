@@ -1,0 +1,13 @@
+<form #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
+  <fieldset>
+    <label for="username">username</label>
+    <input
+      type="text"
+      ngModel
+      #username="ngModel"
+      name="username"
+      id="username"
+    />
+  </fieldset>
+  <button type="submit">Login</button>
+</form>
