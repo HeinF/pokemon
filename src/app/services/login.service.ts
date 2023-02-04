@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, switchMap, map, Observable } from 'rxjs';
+
 import { Trainer } from '../models/trainer.model';
 
 @Injectable({
