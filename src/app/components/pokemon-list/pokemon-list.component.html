@@ -1,14 +1,53 @@
-<p>pokemon-list works!</p>
-<ul>
-  <li *ngFor="let poke of pokemon | slice : 0 : pageIndex">
-    <span>{{ poke.name }}</span>
-    <img src="{{ poke.image }}" alt="{{ poke.name }}" />
-    <button *ngIf="!poke.owned" (click)="ownershipClick(poke.name)">
-      Catch
-    </button>
-    <button *ngIf="poke.owned" (click)="ownershipClick(poke.name)">
-      Release
-    </button>
-  </li>
-</ul>
-<button (click)="loadMoreClick()">Load more pokemon</button>
+<h3>Welcome to the Pokemon catalogue!</h3>
+<div class="catalogue-container">
+  <div
+    class="poke-container"
+    *ngFor="let poke of pokemon | slice : 0 : pageIndex"
+  >
+    <div class="data-container">
+      <img src="{{ poke.image }}" alt="{{ poke.name }}" />
+    </div>
+
+    <h4>{{ poke.name }}</h4>
+    <div class="data-container">
+      <button *ngIf="!poke.owned" (click)="ownershipClick(poke.name)">
+        Catch
+      </button>
+      <button *ngIf="poke.owned" (click)="ownershipClick(poke.name)">
+        Release
+      </button>
+    </div>
+  </div>
+</div>
+<div class="data-container">
+  <button (click)="loadMoreClick()">Load more pokemon</button>
+</div>
+
+<!-- <p>pokemon-list works!</p>
+<div style="display: flex">
+  <ng-container *ngFor="let poke of pokemon | slice : 0 : pageIndex">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <img src="{{ poke.image }}" alt="{{ poke.name }}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>{{ poke.name }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button *ngIf="!poke.owned" (click)="ownershipClick(poke.name)">
+          Catch
+        </button>
+        <button *ngIf="poke.owned" (click)="ownershipClick(poke.name)">
+          Release
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<button (click)="loadMoreClick()">Load more pokemon</button> -->

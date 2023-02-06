@@ -1,6 +1,6 @@
 <ul>
-  <span *ngFor="let poke of pokemon">
-    <span *ngIf="poke.owned">
+  <ng-container *ngFor="let poke of pokemon">
+    <ng-container *ngIf="poke.owned">
       <li>
         <span>{{ poke.name }}</span>
         <img src="{{ poke.image }}" alt="{{ poke.name }}" />
@@ -8,6 +8,6 @@
           Release
         </button>
       </li>
-    </span>
-  </span>
+    </ng-container>
+  </ng-container>
 </ul>
