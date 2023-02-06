@@ -22,6 +22,11 @@ export class TrainerService {
     this._trainer = trainer;
   }
 
+  public logOut(): void {
+    StorageUtil.storageClear(StorageKeys.Trainer);
+    this._trainer = undefined;
+  }
+
   private updateTrainer(trainer: Trainer) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer);
   }

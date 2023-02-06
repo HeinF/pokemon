@@ -59,30 +59,32 @@ export class PokemonService {
   ) {}
 
   public fetchPokemonCatalogue(): void {
-    this.http
-      .get<any>('https://pokeapi.co/api/v2/pokemon?limit=60')
-      .pipe(
-        map((response: any) => {
-          return response.results;
-        })
-      )
-      .subscribe({
-        next: (pokemon: any) => {
-          for (const poke of pokemon) {
-            let pokimon: Pokemon = {
-              name: poke.name,
-              id: -1,
-              url: poke.url,
-              order: 9999,
-              image: '',
-              owned: false,
-              loaded: false,
-            };
-            this._pokemonCatalogue.push(pokimon);
-          }
-          this.fetchFirstPage();
-        },
-      });
+    if (this._pokemonCatalogue.length < 1) {
+      this.http
+        .get<any>('https://pokeapi.co/api/v2/pokemon?limit=60')
+        .pipe(
+          map((response: any) => {
+            return response.results;
+          })
+        )
+        .subscribe({
+          next: (pokemon: any) => {
+            for (const poke of pokemon) {
+              let pokimon: Pokemon = {
+                name: poke.name,
+                id: -1,
+                url: poke.url,
+                order: 9999,
+                image: '',
+                owned: false,
+                loaded: false,
+              };
+              this._pokemonCatalogue.push(pokimon);
+            }
+            this.fetchFirstPage();
+          },
+        });
+    }
   }
 
   public fetchFirstPage(): void {
@@ -107,7 +109,12 @@ export class PokemonService {
               this._pokemonCatalogue[i].order = data.order;
               this._pokemonCatalogue[i].image = data.sprites.front_default;
               this._pokemonCatalogue[i].loaded = true;
-              this.initOwned();
+              // Check and fetch owned pokemon in last loop to avoid duplicate calls
+              if (i === indexEnd - 1) {
+                this.initOwned();
+              }
+              console.log('first ', this._pokemonCatalogue[i].name);
+              console.log('first ', this._pokemonCatalogue[i].loaded);
             },
           });
       }
@@ -127,7 +134,11 @@ export class PokemonService {
 
   public fetchOwned(): void {
     for (const pokemon of this._pokemonCatalogue) {
+      console.log('owned ', pokemon.name);
+      console.log('owned ', pokemon.loaded);
       if (pokemon.owned && !pokemon.loaded) {
+        // console.log(pokemon.name);
+        // console.log(pokemon.loaded);
         this.http
           .get<any>(pokemon.url)
           .pipe(

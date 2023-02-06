@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { Trainer } from 'src/app/models/trainer.model';
 import { PokemonService } from 'src/app/services/pokemon.service';
@@ -9,7 +9,7 @@ import { TrainerService } from 'src/app/services/trainer.service';
   templateUrl: './trainer.page.html',
   styleUrls: ['./trainer.page.css'],
 })
-export class TrainerPage {
+export class TrainerPage implements OnInit {
   get pokemonCatalogue(): Pokemon[] {
     return this.pokemonService.pokemonCatalogue;
   }
@@ -22,6 +22,9 @@ export class TrainerPage {
     private readonly pokemonService: PokemonService,
     private readonly trainerService: TrainerService
   ) {}
+  ngOnInit(): void {
+    this.pokemonService.fetchPokemonCatalogue();
+  }
 
   buttonClick(name: string) {
     console.log(name);
