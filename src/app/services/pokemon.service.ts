@@ -2,6 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import {
+  API_KEY,
+  FETCH_LIMIT,
+  PAGE_ITEM_LIMIT,
+  POKEMON_API_URL,
+  TRAINER_API_URL,
+} from '../const/const';
+import {
   PokeDetail,
   PokeList,
   Pokemon,
@@ -17,7 +24,7 @@ export class PokemonService {
   private _error: string = '';
   private _loading: boolean = false;
   private _pokemonCatalogue: Pokemon[] = [];
-  private _pageIndex: number = 15;
+  private _pageIndex: number = PAGE_ITEM_LIMIT;
 
   public get pokemonCatalogue(): Pokemon[] {
     return this._pokemonCatalogue;
@@ -43,7 +50,7 @@ export class PokemonService {
   public fetchPokemonCatalogue(): void {
     if (this._pokemonCatalogue.length < 1) {
       this.http
-        .get<PokeResult>('https://pokeapi.co/api/v2/pokemon?limit=60')
+        .get<PokeResult>(`${POKEMON_API_URL}?limit=${FETCH_LIMIT}`)
         .pipe(
           map((response: PokeResult) => {
             return response.results;
@@ -66,11 +73,13 @@ export class PokemonService {
             this.fetchFirstPage();
           },
         });
+    } else {
+      this.initOwned();
     }
   }
 
   public fetchFirstPage(): void {
-    let indexEnd = 15;
+    let indexEnd = PAGE_ITEM_LIMIT;
     if (indexEnd >= this._pokemonCatalogue.length) {
       indexEnd = this._pokemonCatalogue.length;
     }
@@ -106,6 +115,8 @@ export class PokemonService {
       for (const poke of this._pokemonCatalogue) {
         if (this.trainerService.isOwned(poke.name)) {
           poke.owned = true;
+        } else {
+          poke.owned = false;
         }
       }
       this.fetchOwned();
@@ -135,7 +146,7 @@ export class PokemonService {
   }
 
   public fetchPokemonPage(): void {
-    this._pageIndex = this._pageIndex + 15;
+    this._pageIndex = this._pageIndex + PAGE_ITEM_LIMIT;
     let indexEnd = this.pageIndex;
 
     if (indexEnd >= this._pokemonCatalogue.length) {
@@ -177,13 +188,12 @@ export class PokemonService {
 
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'x-api-key':
-            '7mz8t776gopsz44n87oxhadtu92d8xf727m8rr9e5rphztdr7oh2y3uc89edszz9',
+          'x-api-key': API_KEY,
         });
 
         this.http
           .patch<Trainer>(
-            `https://assignmentapiheinf-production.up.railway.app/trainers/${this.trainerService.trainer?.id}`,
+            `${TRAINER_API_URL}/${this.trainerService.trainer?.id}`,
             {
               pokemon: [...this.trainerService.trainer!.pokemon],
             },

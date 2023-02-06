@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, switchMap, map, Observable } from 'rxjs';
+import { API_KEY, TRAINER_API_URL } from '../const/const';
 
 import { Trainer } from '../models/trainer.model';
 
@@ -23,9 +24,7 @@ export class LoginService {
 
   private checkTrainer(username: string): Observable<Trainer | undefined> {
     return this.http
-      .get<Trainer[]>(
-        `https://assignmentapiheinf-production.up.railway.app/trainers?username=${username}`
-      )
+      .get<Trainer[]>(`${TRAINER_API_URL}?username=${username}`)
       .pipe(map((response: Trainer[]) => response.pop()));
   }
 
@@ -37,12 +36,11 @@ export class LoginService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'x-api-key':
-        '7mz8t776gopsz44n87oxhadtu92d8xf727m8rr9e5rphztdr7oh2y3uc89edszz9',
+      'x-api-key': API_KEY,
     });
 
     return this.http.post<Trainer>(
-      `https://assignmentapiheinf-production.up.railway.app/trainers?username=${username}`,
+      `${TRAINER_API_URL}?username=${username}`,
       trainer,
       {
         headers,
