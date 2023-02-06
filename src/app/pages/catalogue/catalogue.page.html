@@ -1,5 +1,4 @@
-<p *ngIf="loading">Loading Pokemon</p>
-<p>{{error}}</p>
+<button (click)="trainer()">Trainer</button>
 <app-pokemon-list
   [pokemon]="pokemonCatalogue"
   [pageIndex]="pageIndex"

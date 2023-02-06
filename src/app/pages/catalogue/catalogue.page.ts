@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalogue',
@@ -28,7 +29,10 @@ export class CataloguePage implements OnInit {
     return this.pokemonService.error;
   }
 
-  constructor(private readonly pokemonService: PokemonService) {}
+  constructor(
+    private readonly pokemonService: PokemonService,
+    private readonly router: Router
+  ) {}
 
   buttonClick(name: string) {
     console.log(name);
@@ -41,6 +45,10 @@ export class CataloguePage implements OnInit {
 
   handleCatch = (name: string): void => {
     //this.pokemonService.catch(name);
+  };
+
+  trainer = (): void => {
+    this.router.navigateByUrl('/trainer');
   };
 
   ngOnInit(): void {

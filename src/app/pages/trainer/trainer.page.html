@@ -1,1 +1,7 @@
-<p>trainer works!</p>
+<p *ngIf="trainer">
+  Hi {{trainer.username}}, here is a list of Pokemon you have caught!
+</p>
+<app-owned-list
+  [pokemon]="pokemonCatalogue"
+  (listenParentHandler)="buttonClick($event)"
+></app-owned-list>
