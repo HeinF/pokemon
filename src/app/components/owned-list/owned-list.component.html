@@ -1,13 +1,16 @@
-<ul>
+<div class="catalogue-container">
   <ng-container *ngFor="let poke of pokemon">
     <ng-container *ngIf="poke.owned">
-      <li>
-        <span>{{ poke.name }}</span>
-        <img src="{{ poke.image }}" alt="{{ poke.name }}" />
-        <button *ngIf="poke.owned" (click)="releaseClick(poke.name)">
-          Release
-        </button>
-      </li>
+      <div class="poke-container">
+        <div class="data-container">
+          <span class="material-icons owned-icon">check_circle</span>
+          <img src="{{ poke.image }}" alt="{{ poke.name }}" />
+        </div>
+        <h4>{{ poke.name }}</h4>
+        <div class="data-container">
+          <button (click)="releaseClick(poke.name)">Release</button>
+        </div>
+      </div>
     </ng-container>
   </ng-container>
-</ul>
+</div>

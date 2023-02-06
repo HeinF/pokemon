@@ -1,6 +1,6 @@
-<p *ngIf="trainer">
-  Hi {{trainer.username}}, here is a list of Pokemon you have caught!
-</p>
+<h3 *ngIf="trainer">
+  Hi {{trainer.username}}, here is a list of all the Pokemon you have caught!
+</h3>
 <app-owned-list
   [pokemon]="pokemonCatalogue"
   (listenRelease)="releaseClick($event)"

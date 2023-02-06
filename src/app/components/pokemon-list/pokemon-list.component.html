@@ -4,6 +4,9 @@
     class="poke-container"
     *ngFor="let poke of pokemon | slice : 0 : pageIndex"
   >
+    <span *ngIf="poke.owned" class="material-icons owned-icon"
+      >check_circle</span
+    >
     <div class="data-container">
       <img src="{{ poke.image }}" alt="{{ poke.name }}" />
     </div>

@@ -21,6 +21,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .data-container {
@@ -28,6 +29,8 @@
     justify-content: center;
 }
 
-.load-more {
-
+.owned-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
