@@ -1,5 +1,8 @@
-<h3 *ngIf="trainer">
+<h3 *ngIf="trainer" class="my-5">
   Hi {{trainer.username}}, here is a list of all the Pokemon you have caught!
+  <h5 *ngIf="trainer.pokemon.length < 1" class="my-3">
+    Hmm, the list is empty, head to the Catalogue to catch some Pokemon!
+  </h5>
 </h3>
 <app-owned-list
   [pokemon]="pokemonCatalogue"

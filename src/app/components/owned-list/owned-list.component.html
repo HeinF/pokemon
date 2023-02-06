@@ -8,7 +8,12 @@
         </div>
         <h4>{{ poke.name }}</h4>
         <div class="data-container">
-          <button (click)="releaseClick(poke.name)">Release</button>
+          <button
+            class="btn btn-outline-warning"
+            (click)="releaseClick(poke.name)"
+          >
+            Release
+          </button>
         </div>
       </div>
     </ng-container>
