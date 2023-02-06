@@ -13,12 +13,44 @@ export class TrainerService {
     return this._trainer;
   }
 
+  // public getOwned(): String[] | undefined {
+  //   return this._trainer?.pokemon;
+  // }
+
   public set trainer(trainer: Trainer | undefined) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer!);
     this._trainer = trainer;
   }
 
+  private updateTrainer(trainer: Trainer) {
+    StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer);
+  }
+
   constructor() {
     this._trainer = StorageUtil.storageRead<Trainer>(StorageKeys.Trainer);
+  }
+  public isOwned(name: string): boolean {
+    if (this._trainer) {
+      return Boolean(
+        this.trainer?.pokemon.find((pokemon: string) => pokemon === name)
+      );
+    }
+    return false;
+  }
+
+  public addPokemon(name: string): void {
+    if (this._trainer) {
+      this._trainer.pokemon.push(name);
+      this.updateTrainer(this._trainer);
+    }
+  }
+
+  public removePokemon(name: string): void {
+    if (this._trainer) {
+      this._trainer.pokemon = this._trainer.pokemon.filter(
+        (poke: string) => poke !== name
+      );
+      this.updateTrainer(this._trainer);
+    }
   }
 }

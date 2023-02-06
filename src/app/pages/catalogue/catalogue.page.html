@@ -1,1 +1,8 @@
-<p>catalogue works!</p>
+<p *ngIf="loading">Loading Pokemon</p>
+<p>{{error}}</p>
+<app-pokemon-list
+  [pokemon]="pokemonCatalogue"
+  [pageIndex]="pageIndex"
+  (listenParentHandler)="buttonClick($event)"
+  (loadMore)="loadMoreHandler()"
+></app-pokemon-list>
