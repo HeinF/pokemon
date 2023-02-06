@@ -1,7 +1,6 @@
-<button (click)="trainer()">Trainer</button>
 <app-pokemon-list
   [pokemon]="pokemonCatalogue"
   [pageIndex]="pageIndex"
-  (listenParentHandler)="buttonClick($event)"
-  (loadMore)="loadMoreHandler()"
+  (listenOwnership)="ownershipClick($event)"
+  (listenLoadMore)="loadMoreClick()"
 ></app-pokemon-list>

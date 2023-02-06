@@ -9,14 +9,14 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 export class PokemonListComponent {
   @Input() pokemon: Pokemon[] = [];
   @Input() pageIndex: number = 15;
-  @Output() listenParentHandler: EventEmitter<any> = new EventEmitter();
-  @Output() loadMore: EventEmitter<any> = new EventEmitter();
+  @Output() listenOwnership: EventEmitter<any> = new EventEmitter();
+  @Output() listenLoadMore: EventEmitter<any> = new EventEmitter();
 
-  childClick(name: string) {
-    this.listenParentHandler.emit(name);
+  ownershipClick(name: string) {
+    this.listenOwnership.emit(name);
   }
 
   loadMoreClick() {
-    this.loadMore.emit();
+    this.listenLoadMore.emit();
   }
 }

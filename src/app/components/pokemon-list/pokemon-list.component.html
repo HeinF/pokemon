@@ -3,8 +3,12 @@
   <li *ngFor="let poke of pokemon | slice : 0 : pageIndex">
     <span>{{ poke.name }}</span>
     <img src="{{ poke.image }}" alt="{{ poke.name }}" />
-    <button *ngIf="!poke.owned" (click)="childClick(poke.name)">Catch</button>
-    <button *ngIf="poke.owned" (click)="childClick(poke.name)">Release</button>
+    <button *ngIf="!poke.owned" (click)="ownershipClick(poke.name)">
+      Catch
+    </button>
+    <button *ngIf="poke.owned" (click)="ownershipClick(poke.name)">
+      Release
+    </button>
   </li>
 </ul>
 <button (click)="loadMoreClick()">Load more pokemon</button>

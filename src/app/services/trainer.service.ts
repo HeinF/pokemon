@@ -13,10 +13,6 @@ export class TrainerService {
     return this._trainer;
   }
 
-  // public getOwned(): String[] | undefined {
-  //   return this._trainer?.pokemon;
-  // }
-
   public set trainer(trainer: Trainer | undefined) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer!);
     this._trainer = trainer;
@@ -27,7 +23,7 @@ export class TrainerService {
     this._trainer = undefined;
   }
 
-  private updateTrainer(trainer: Trainer) {
+  private updateStorage(trainer: Trainer) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer);
   }
 
@@ -46,7 +42,7 @@ export class TrainerService {
   public addPokemon(name: string): void {
     if (this._trainer) {
       this._trainer.pokemon.push(name);
-      this.updateTrainer(this._trainer);
+      this.updateStorage(this._trainer);
     }
   }
 
@@ -55,7 +51,7 @@ export class TrainerService {
       this._trainer.pokemon = this._trainer.pokemon.filter(
         (poke: string) => poke !== name
       );
-      this.updateTrainer(this._trainer);
+      this.updateStorage(this._trainer);
     }
   }
 }

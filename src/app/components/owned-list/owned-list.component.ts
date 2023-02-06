@@ -8,9 +8,9 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 })
 export class OwnedListComponent {
   @Input() pokemon: Pokemon[] = [];
-  @Output() listenParentHandler: EventEmitter<any> = new EventEmitter();
+  @Output() listenRelease: EventEmitter<any> = new EventEmitter();
 
-  childClick(name: string) {
-    this.listenParentHandler.emit(name);
+  releaseClick(name: string) {
+    this.listenRelease.emit(name);
   }
 }

@@ -26,8 +26,7 @@ export class TrainerPage implements OnInit {
     this.pokemonService.fetchPokemonCatalogue();
   }
 
-  buttonClick(name: string) {
-    console.log(name);
+  releaseClick(name: string) {
     this.pokemonService.toggleOwned(name);
   }
 }

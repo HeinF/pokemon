@@ -4,7 +4,7 @@
       <li>
         <span>{{ poke.name }}</span>
         <img src="{{ poke.image }}" alt="{{ poke.name }}" />
-        <button *ngIf="poke.owned" (click)="childClick(poke.name)">
+        <button *ngIf="poke.owned" (click)="releaseClick(poke.name)">
           Release
         </button>
       </li>

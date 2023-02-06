@@ -9,10 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./catalogue.page.css'],
 })
 export class CataloguePage implements OnInit {
-  get pokemonList(): Pokemon[] {
-    return this.pokemonService.pokemonList;
-  }
-
   get pokemonCatalogue(): Pokemon[] {
     return this.pokemonService.pokemonCatalogue;
   }
@@ -34,25 +30,15 @@ export class CataloguePage implements OnInit {
     private readonly router: Router
   ) {}
 
-  buttonClick(name: string) {
-    console.log(name);
+  ownershipClick(name: string) {
     this.pokemonService.toggleOwned(name);
   }
 
-  loadMoreHandler() {
+  loadMoreClick() {
     this.pokemonService.fetchPokemonPage();
   }
 
-  handleCatch = (name: string): void => {
-    //this.pokemonService.catch(name);
-  };
-
-  trainer = (): void => {
-    this.router.navigateByUrl('/trainer');
-  };
-
   ngOnInit(): void {
-    // this.pokemonService.fetchPokemon();
     this.pokemonService.fetchPokemonCatalogue();
   }
 }
