@@ -17,6 +17,7 @@ export class NavbarComponent {
     private readonly trainerService: TrainerService,
     private readonly router: Router
   ) {}
+  // Handle when the user click on logout
   handleLogout(): void {
     this.trainerService.logOut();
     this.router.navigateByUrl('/');

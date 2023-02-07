@@ -12,6 +12,7 @@ import { TrainerService } from '../services/trainer.service';
 @Injectable({
   providedIn: 'root',
 })
+// Guard catalogue and trainer routes
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly router: Router,

@@ -10,6 +10,7 @@ export class OwnedListComponent {
   @Input() pokemon: Pokemon[] = [];
   @Output() listenRelease: EventEmitter<any> = new EventEmitter();
 
+  // Emit that trainer has pressed release on a pokemon
   releaseClick(name: string) {
     this.listenRelease.emit(name);
   }

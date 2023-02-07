@@ -30,14 +30,15 @@ export class CataloguePage implements OnInit {
     private readonly router: Router
   ) {}
 
+  // Handle emitted event. Player has either pressed catch or release
   ownershipClick(name: string) {
     this.pokemonService.toggleOwned(name);
   }
-
+  // Fetches details for more Pokemon and displays them
   loadMoreClick() {
     this.pokemonService.fetchPokemonPage();
   }
-
+  // Ensure catalogue has been loaded
   ngOnInit(): void {
     this.pokemonService.fetchPokemonCatalogue();
   }

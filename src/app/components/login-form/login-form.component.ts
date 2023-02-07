@@ -16,7 +16,7 @@ export class LoginFormComponent {
     private readonly LoginService: LoginService,
     private readonly trainerService: TrainerService
   ) {}
-
+  // Handle login
   public loginSubmit(loginForm: NgForm): void {
     const { username } = loginForm.value;
 

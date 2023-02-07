@@ -1,12 +1,15 @@
 export class StorageUtil {
+  //save trainer to storage
   public static storageSave<T>(key: string, value: T): void {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
 
+  //Clear storage on logout
   public static storageClear<T>(key: string): void {
     sessionStorage.removeItem(key);
   }
 
+  //Read trainer from storage
   public static storageRead<T>(key: string): T | undefined {
     const storedValue = sessionStorage.getItem(key);
     try {

@@ -1,9 +1,11 @@
+<!-- Display the name of the trainer and a greeting. If trainer has no Pokemon, encourage them to go to catalogue -->
 <h3 *ngIf="trainer" class="my-5">
   Hi {{trainer.username}}, here is a list of all the Pokemon you have caught!
   <h5 *ngIf="trainer.pokemon.length < 1" class="my-3">
     Hmm, the list is empty, head to the Catalogue to catch some Pokemon!
   </h5>
 </h3>
+<!-- Display owned-list componet and pass along input and output -->
 <app-owned-list
   [pokemon]="pokemonCatalogue"
   (listenRelease)="releaseClick($event)"

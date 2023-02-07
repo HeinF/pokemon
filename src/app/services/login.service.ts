@@ -11,6 +11,7 @@ import { Trainer } from '../models/trainer.model';
 export class LoginService {
   constructor(private readonly http: HttpClient) {}
 
+  //Check if trainer exist in the API, if not we create a new trainer
   public login(username: string): Observable<Trainer> {
     return this.checkTrainer(username).pipe(
       switchMap((trainer: Trainer | undefined) => {

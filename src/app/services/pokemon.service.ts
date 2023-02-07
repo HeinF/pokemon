@@ -21,11 +21,18 @@ import { TrainerService } from './trainer.service';
   providedIn: 'root',
 })
 export class PokemonService {
+  // Error and loading is not currently used TODO
   private _error: string = '';
   private _loading: boolean = false;
+
+  // Catalogue containing pokemon
   private _pokemonCatalogue: Pokemon[] = [];
+
+  // Used to set the number of pokemon to display and fetch details of on first page load,
+  // and the amount of additional pokemon to fetch every time a users asks for more pokemon.
   private _pageIndex: number = PAGE_ITEM_LIMIT;
 
+  // getters
   public get pokemonCatalogue(): Pokemon[] {
     return this._pokemonCatalogue;
   }
@@ -47,7 +54,10 @@ export class PokemonService {
     private readonly trainerService: TrainerService
   ) {}
 
+  // Fetches basic details in one request on a number of pokemon defined by FETCH_LIMIT up to all pokemon available in the API
+  // Details include name and URL to call for information on specific pokemon
   public fetchPokemonCatalogue(): void {
+    // Check if pokemonCatalogue has already been fetched to avoid unnecessary API calls
     if (this._pokemonCatalogue.length < 1) {
       this.http
         .get<PokeResult>(`${POKEMON_API_URL}?limit=${FETCH_LIMIT}`)
@@ -58,6 +68,8 @@ export class PokemonService {
         )
         .subscribe({
           next: (pokemonList: PokeList[]) => {
+            // Create a placeholder pokemon and add it to pokemonCatalogue
+            //Placeholder data is used for details not in the response
             for (const poke of pokemonList) {
               let pokemon: Pokemon = {
                 name: poke.name,
@@ -66,24 +78,31 @@ export class PokemonService {
                 order: 9999,
                 image: '',
                 owned: false,
+                // Boolean value to indicate that only basic data has been fetched
+                // More data is required actually display the Pokemon
                 loaded: false,
               };
               this._pokemonCatalogue.push(pokemon);
             }
+            // This function will fetch full details so we can show the first page of Pokemon
             this.fetchFirstPage();
           },
         });
     } else {
+      // Check for changes to owned Pokemon, even if catalogue has been fetched
       this.initOwned();
     }
   }
 
+  // Fetches full details of the first batch of Pokemon so they can be displayed.
   public fetchFirstPage(): void {
+    // Limits the number of pokemon we get full details for
     let indexEnd = PAGE_ITEM_LIMIT;
+    // Prevent index out of bounds
     if (indexEnd >= this._pokemonCatalogue.length) {
       indexEnd = this._pokemonCatalogue.length;
     }
-
+    // Loop over x amount of Pokemon in the Catalogue and fetch their details
     for (let i = 0; i < indexEnd; i++) {
       let poke = this._pokemonCatalogue[i];
       if (!poke.loaded) {
@@ -110,6 +129,7 @@ export class PokemonService {
     }
   }
 
+  // Check if the pokemon is owned by the trainer, and if so set the 'owned' flag in the catalogue
   public initOwned(): void {
     if (this.trainerService.trainer) {
       for (const poke of this._pokemonCatalogue) {
@@ -119,10 +139,12 @@ export class PokemonService {
           poke.owned = false;
         }
       }
+      // A user can have pokemon that are outside the bounds of the first page, so we ensure that we fetch
+      // details for all owned Pokemon as these will be displayed on the trainer page.
       this.fetchOwned();
     }
   }
-
+  // Ensure that we have fetched detailed data for all owned pokemon
   public fetchOwned(): void {
     for (const pokemon of this._pokemonCatalogue) {
       if (pokemon.owned && !pokemon.loaded) {
@@ -145,6 +167,7 @@ export class PokemonService {
     }
   }
 
+  // Get details of another slice of pokemon on request by the user
   public fetchPokemonPage(): void {
     this._pageIndex = this._pageIndex + PAGE_ITEM_LIMIT;
     let indexEnd = this.pageIndex;
@@ -175,6 +198,7 @@ export class PokemonService {
     }
   }
 
+  // Removes or adds a pokemon to the trainer when the user catches or releases a Pokemon
   public toggleOwned(name: string): void {
     for (const poke of this._pokemonCatalogue) {
       if (poke.name === name) {

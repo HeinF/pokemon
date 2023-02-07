@@ -8,6 +8,8 @@ export const TRAINER_API_URL: string =
 
 export const POKEMON_API_URL: string = 'https://pokeapi.co/api/v2/pokemon';
 
-export const FETCH_LIMIT: number = 60;
+// Number of Pokemon to fetch without details. Currently API holds 1279 pokemon
+export const FETCH_LIMIT: number = 1300;
 
+// Number of Pokemon to fetch complete data for. Taxes API, therefor limited number at a time
 export const PAGE_ITEM_LIMIT: number = 20;

@@ -9,20 +9,24 @@ import { StorageUtil } from '../utils/storage.util';
 export class TrainerService {
   private _trainer?: Trainer;
 
+  // get trainer
   public get trainer(): Trainer | undefined {
     return this._trainer;
   }
 
+  //Saves trainer to storage and them sets trainer in service
   public set trainer(trainer: Trainer | undefined) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer!);
     this._trainer = trainer;
   }
 
+  //Clear storage on logout and set trainer to undefined
   public logOut(): void {
     StorageUtil.storageClear(StorageKeys.Trainer);
     this._trainer = undefined;
   }
 
+  //Update trainer in session storage, used when a new pokemon is caught
   private updateStorage(trainer: Trainer) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, trainer);
   }
@@ -30,6 +34,8 @@ export class TrainerService {
   constructor() {
     this._trainer = StorageUtil.storageRead<Trainer>(StorageKeys.Trainer);
   }
+
+  // Checks if the trainer owns a given pokemon
   public isOwned(name: string): boolean {
     if (this._trainer) {
       return Boolean(
@@ -38,7 +44,7 @@ export class TrainerService {
     }
     return false;
   }
-
+  //Add pokemon to trainer and then update session storage
   public addPokemon(name: string): void {
     if (this._trainer) {
       this._trainer.pokemon.push(name);
@@ -46,6 +52,7 @@ export class TrainerService {
     }
   }
 
+  //Removes a pokemon from the trainer and session storage
   public removePokemon(name: string): void {
     if (this._trainer) {
       this._trainer.pokemon = this._trainer.pokemon.filter(

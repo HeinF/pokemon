@@ -23,9 +23,10 @@ export class TrainerPage implements OnInit {
     private readonly trainerService: TrainerService
   ) {}
   ngOnInit(): void {
+    // Ensure that the catalogue has been fetched
     this.pokemonService.fetchPokemonCatalogue();
   }
-
+  // Remove Pokemon from trainer if he chooses to release it
   releaseClick(name: string) {
     this.pokemonService.toggleOwned(name);
   }

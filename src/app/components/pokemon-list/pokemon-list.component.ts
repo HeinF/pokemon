@@ -12,10 +12,11 @@ export class PokemonListComponent {
   @Output() listenOwnership: EventEmitter<any> = new EventEmitter();
   @Output() listenLoadMore: EventEmitter<any> = new EventEmitter();
 
+  // Emit that user has pressed catch or release on a given pokemon
   ownershipClick(name: string) {
     this.listenOwnership.emit(name);
   }
-
+  // Request more pokemon with full details
   loadMoreClick() {
     this.listenLoadMore.emit();
   }

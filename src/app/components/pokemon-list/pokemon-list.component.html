@@ -1,3 +1,4 @@
+<!-- Greet the user and display a number of Pokemon -->
 <h3 class="my-5">Welcome to the Pokemon catalogue!</h3>
 <div class="catalogue-container">
   <div
@@ -35,32 +36,3 @@
     Load more pokemon
   </button>
 </div>
-
-<!-- <p>pokemon-list works!</p>
-<div style="display: flex">
-  <ng-container *ngFor="let poke of pokemon | slice : 0 : pageIndex">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <img src="{{ poke.image }}" alt="{{ poke.name }}" />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <h3>{{ poke.name }}</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button *ngIf="!poke.owned" (click)="ownershipClick(poke.name)">
-          Catch
-        </button>
-        <button *ngIf="poke.owned" (click)="ownershipClick(poke.name)">
-          Release
-        </button>
-      </div>
-    </div>
-  </ng-container>
-</div>
-<button (click)="loadMoreClick()">Load more pokemon</button> -->
