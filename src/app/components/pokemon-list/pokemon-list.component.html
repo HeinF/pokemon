@@ -1,0 +1,38 @@
+<!-- Greet the user and display a number of Pokemon -->
+<h3 class="my-5">Welcome to the Pokemon catalogue!</h3>
+<div class="catalogue-container">
+  <div
+    class="poke-container"
+    *ngFor="let poke of pokemon | slice : 0 : pageIndex"
+  >
+    <span *ngIf="poke.owned" class="material-icons owned-icon"
+      >check_circle</span
+    >
+    <div class="data-container">
+      <img src="{{ poke.image }}" alt="{{ poke.name }}" />
+    </div>
+
+    <h4>{{ poke.name }}</h4>
+    <div class="data-container">
+      <button
+        *ngIf="!poke.owned"
+        class="btn btn-outline-success"
+        (click)="ownershipClick(poke.name)"
+      >
+        Catch
+      </button>
+      <button
+        *ngIf="poke.owned"
+        class="btn btn-outline-warning"
+        (click)="ownershipClick(poke.name)"
+      >
+        Release
+      </button>
+    </div>
+  </div>
+</div>
+<div class="data-container mb-5 mt-4">
+  <button class="btn btn-secondary" (click)="loadMoreClick()">
+    Load more pokemon
+  </button>
+</div>

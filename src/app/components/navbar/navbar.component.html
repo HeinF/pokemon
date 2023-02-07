@@ -1,0 +1,25 @@
+<!-- Display navbar and only show catalogue, trainer and logout if trainer is defined -->
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">PokeApp</a>
+    <div
+      *ngIf="trainer"
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/catalogue" aria-current="page"
+            >Catalogue</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/trainer">Trainer</a>
+        </li>
+      </ul>
+      <button class="btn btn-outline-dark" (click)="handleLogout()">
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>

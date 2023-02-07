@@ -1,0 +1,36 @@
+.h3, h3 {
+    text-align: center;
+}
+
+.catalogue-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 70%;
+    margin: auto;
+    justify-content: center;
+}
+
+.poke-container {
+    border: 2px solid blue;
+    border-radius: 10%;
+    padding: 0.6rem;
+    margin: 0.8rem 1rem;
+    width: 10rem;
+    height: 14rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.data-container {
+    display: flex;
+    justify-content: center;
+}
+
+.owned-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
