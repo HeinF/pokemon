@@ -8,6 +8,10 @@ An app where you can view a catalogue of Pokemon, collect them and view your col
 
 The app can be found here: https://pokemon-six-iota.vercel.app/
 
+## Component Diagram
+
+see pokemon-components-diagram
+
 ## Installation
 Clone the project, open a terminal and run npm install
 
